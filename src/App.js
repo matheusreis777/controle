@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Form from "./components/Form";
 import Header from "./components/Header";
 import Resume from "./components/Resume";
-import Form from "./components/Form";
 import GlobalStyle from "./styles/global";
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
             .map((transaction) => Number(transaction.amount));
 
         const amountIncome = transactionsList
-            .filter((item) => item.expense)
+            .filter((item) => !item.expense)
             .map((transaction) => Number(transaction.amount));
 
         const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
@@ -47,7 +47,7 @@ const App = () => {
         <>
             <Header />
             <Resume income={income} expense={expense} total={total} />
-            <Form handleAdd={handleAdd} transactionsList={transactionsList} />
+            <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
             <GlobalStyle />
         </>
     );
